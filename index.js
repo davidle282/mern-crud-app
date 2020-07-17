@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-mongoose.connect(
-  "mongodb+srv://devit:mju7LKBKY4SDxdb@cluster0-djpfo.mongodb.net/mern-crud?retryWrites=true&w=majority"
-);
+mongoose.connect("mongodb://127.0.0.1:27017/mern-crud");
 
 const app = express();
 
