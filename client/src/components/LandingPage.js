@@ -30,10 +30,42 @@ class App extends Component {
     });
   };
 
+  filterContent(posts, searchTerm) {
+    const result = posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchTerm) ||
+        post.description.toLowerCase().includes(searchTerm) ||
+        post.postCategory.toLowerCase().includes(searchTerm)
+    );
+    this.setState({ posts: result });
+  }
+
+  handleTextSearch = (e) => {
+    const searchTerm = e.currentTarget.value;
+    axios.get("/posts").then((res) => {
+      if (res.data.success) {
+        this.filterContent(res.data.posts, searchTerm);
+      }
+    });
+  };
+
   render() {
     return (
       <div className="container">
-        <p>All Post</p>
+        <div className="row">
+          <div className="col-lg-9 mt-2 mb-2">
+            <h4>All Posts</h4>
+          </div>
+          <div className="col-lg-3 mt-2 mb-2">
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search"
+              name="searchTerm"
+              onChange={this.handleTextSearch}
+            ></input>
+          </div>
+        </div>
 
         <table class="table">
           <thead>
