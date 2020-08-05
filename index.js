@@ -1,14 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
-
 const keys = require("./config/keys");
 
-mongoose.connect(
-  //"mongodb://127.0.0.1:27017/mern-crud"
-  keys.mongo_uri
-);
+const cors = require("cors");
+
+mongoose.connect(keys.mongo_uri);
 
 const app = express();
 
@@ -17,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/posts", require("./routes/post"));
 
-if (process.env.NODE_ENV == "production") {
+if ((process.env.NODE_ENV = "production")) {
   app.use(express.static("client/build"));
   const path = require("path");
   app.get("*", (req, res) => {
